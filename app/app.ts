@@ -2,10 +2,14 @@ import express, { Request, Response } from "express";
 import helmet from "helmet";
 import { Controller } from "./interfaces/controller";
 import { env } from "./config/env";
+import pool from "./config/db";
 
 class App {
 	private app: express.Application;
 	constructor(controller: Controller[]) {
+		pool.on("connect", () => {
+			console.log("connected to DB");
+		});
 		this.app = express();
 		this.initMiddleware();
 		this.initController(controller);

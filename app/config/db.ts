@@ -11,10 +11,6 @@ const pool = new Pool({
 	idleTimeoutMillis: 30000,
 });
 
-pool.on("connect", () => {
-	console.log("connected to DB");
-});
-
 export const createUsersTable = () => {
 	const queryText = `CREATE TABLE IF NOT EXISTS
 	users(
