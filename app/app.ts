@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import helmet from "helmet";
 import { Controller } from "./interfaces/controller";
 import { env } from "./config/env";
@@ -7,6 +7,10 @@ class App {
 	private app: express.Application;
 	constructor(controller: Controller[]) {
 		this.app = express();
+		this.app.get("/", (req: Request, res: Response) => {
+			res.send("this is '/'");
+		});
+		this.initMiddleware();
 		this.initController(controller);
 	}
 
