@@ -16,4 +16,6 @@ const findUserById = (id: number) => {
 	return { name: "findUserById", text: "SELECT * FROM users WHERE id = $1", values: [id] };
 };
 
+const createTable = { name: "", text: "", values: [] };
+
 export default { createUser, findUserByEmail, findUserById };

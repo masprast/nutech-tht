@@ -20,7 +20,9 @@ export class AuthRepository {
 		// } finally {
 		// 	client.release();
 		// }
-		const result = await pool.query<User>(statement.createUser(payload));
+		const text = "INSERT INTO users (email, password, first_name, last_name) VALUES ($1, $2, $3,$4) RETURNING *";
+		const values = [payload.email, payload.password, payload.first_name, payload.last_name];
+		const result = await pool.query<User>(text, values);
 		return result.rows[0];
 	}
 

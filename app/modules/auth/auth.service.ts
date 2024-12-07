@@ -1,7 +1,7 @@
 import { User } from "../../models/user.model";
-import { encrypt } from "../../utils/pwdUtil";
+import { decrypt, encrypt } from "../../utils/pwdUtil";
 import { AuthRepository } from "./auth.repository";
-import { RegisterPayload } from "./auth.validation";
+import { LoginPayload, RegisterPayload } from "./auth.validation";
 import http_error from "http-errors";
 
 export class AuthService {
@@ -20,6 +20,21 @@ export class AuthService {
 			throw new http_error.BadRequest();
 		}
 		return this.returnWithoutPwd(newUser);
+	}
+
+	/**
+	 * loginUser
+	 */
+	public async loginUser(payload: LoginPayload) {
+		const existedUser = await this.authrepo.findUserByEmail(payload.email);
+		if (!existedUser) {
+			throw new http_error.Unauthorized("user not found");
+		}
+		const pwdMatch = await decrypt(payload.password, existedUser.password);
+		if (!pwdMatch) {
+			throw new http_error.Unauthorized("incorrect password");
+		}
+		return this.returnWithoutPwd(existedUser);
 	}
 
 	private returnWithoutPwd(user: User) {
