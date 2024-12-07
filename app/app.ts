@@ -7,9 +7,6 @@ class App {
 	private app: express.Application;
 	constructor(controller: Controller[]) {
 		this.app = express();
-		this.app.get("/", (req: Request, res: Response) => {
-			res.send("this is '/'");
-		});
 		this.initMiddleware();
 		this.initController(controller);
 	}
@@ -19,6 +16,9 @@ class App {
 	}
 
 	private initController(controller: Controller[]) {
+		this.app.get("/", (req: Request, res: Response) => {
+			res.send("this is '/'");
+		});
 		controller.forEach((c) => {
 			this.app.use("api/v1", c.router);
 		});

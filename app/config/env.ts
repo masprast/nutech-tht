@@ -9,7 +9,7 @@ export const env = cleanEnv(process.env, {
 	POSTGRES_HOST: str(),
 	POSTGRES_PORT: port({ default: 5432 }),
 	POSTGRES_DB: str(),
-	POSTGRES_DB_URL: str(),
+	DATABASE_URL: str(),
 
 	PORT: port({ default: 3000 }),
 
