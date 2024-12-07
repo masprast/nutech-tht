@@ -184,3 +184,34 @@ transaksi_hist : `{
     ]
   }
 }`
+
+# Assignment API Programmer
+
+Tugas ini untuk menguji kemampuan Anda dalam membuat REST API berdasarkan
+spesifikasi yang diberikan dalam bentuk dokumen Kontrak API (Swagger) dan ketentuan
+request / response body berada di persyaratan poin nomor 2. Pastikan Anda membaca dan
+memahami persyaratan yang terdapat pada dokumen ini.
+REST API yang dibuat memiliki modul Registrasi, Login, Cek Saldo, Top Up dan
+Transaksi. Pada Transaksi dapat melakukan layanan pembayaran seperti Pulsa, Voucher Game
+dan lain-lain.
+Persyaratan :
+
+1. Framework yang digunakan :
+   ●Untuk kandidat Java Programmer (Spring Boot).
+   ●Untuk kandidat NodeJs Programmer (ExpressJs).
+2. Kontrak API (Swagger) bisa dilihat pada link https://api-doc-tht.nutech-integrasi.com
+3. Deploy aplikasi ke cloud (Alternatif layanan gratis seperti railway.app).
+4. Simpan source code pada layanan Git (Github atau Gitlab).
+5. Sertakan design database kedalam repository aplikasi (DDL).
+6. Deadline 3 hari, dimulai dari diterimanya dokumen ini.
+   Kriteria Penilaian :
+7. Kesesuaian REST API dengan spesifikasi Kontrak API (Swagger).
+8. Design database terhadap aplikasi yang dibuat.
+9. Wajib menggunakan raw query dengan implementasi prepared statement.
+10. Kesesuaian Saldo/Balance sesuai perhitungan (penambahan saldo topup & pengurangan
+    saldo saat transaksi).
+11. Error handling dengan baik (misalnya, validasi input).
+12. Kode yang bersih, terstruktur dan mudah dipahami.
+
+    Pengiriman :
+    Apabila tugas telah diselesaikan, kirimkan ke alamat email puji.prasetyo.nutech@gmail.com, kusnadi.nutech@gmail.com, ilham@nutech-integrasi.com, hrd@nutech-integrasi.com dan cc ke deddy.nutech@gmail.com dengan subject “Test Praktek API Programmer”, dan sertakan di dalam email URL Aplikasi yang sudah di hosting, beserta URL repository nya. Semoga sukses dalam menyelesaikan tugas ini! Selamat mengerjakan!
