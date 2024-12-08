@@ -3,9 +3,9 @@ import { env } from "./env";
 import { Response } from "express";
 
 const pool = new Pool({
-	host: env.POSTGRES_HOST,
+	host: env.PGHOST,
 	user: env.POSTGRES_USER,
-	password: env.POSTGRES_PASS,
+	password: env.POSTGRES_PASSWORD,
 	database: env.POSTGRES_DB,
 	port: env.POSTGRES_PORT,
 	// connectionString: env.DATABASE_URL,
