@@ -1,4 +1,4 @@
-import swaggerAutogen from "swagger-autogen";
+import swaggerJSDoc from "swagger-jsdoc";
 
 const doc = {
 	info: {
@@ -11,7 +11,10 @@ const doc = {
 		securitySchemes: {
 			bearerAuth: { type: "http", scheme: "bearer" },
 		},
+		schemas: {},
 	},
 };
 
-const outputFile = "./swagger_output.json";
+const swaggerDef = swaggerJSDoc({ swaggerDefinition: doc, apis: ["app/modules/**/*.ts"] });
+
+export default swaggerDef;
