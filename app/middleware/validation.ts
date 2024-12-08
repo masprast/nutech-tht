@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { AnyZodObject, ZodError } from "zod";
+import herror from "http-errors";
 
 const validationMiddleware = (schema: AnyZodObject) => async (req: Request, _: Response, next: NextFunction) => {
 	try {
@@ -7,8 +8,10 @@ const validationMiddleware = (schema: AnyZodObject) => async (req: Request, _: R
 		return next();
 	} catch (error) {
 		if (error instanceof ZodError) {
-			return next();
+			return next(new herror.BadRequest());
 		}
-		return next();
+		return next(new herror.BadRequest());
 	}
 };
+
+export default validationMiddleware;

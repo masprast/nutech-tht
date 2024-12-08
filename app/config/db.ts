@@ -1,5 +1,6 @@
 import { Pool } from "pg";
 import { env } from "./env";
+import { Response } from "express";
 
 const pool = new Pool({
 	host: env.POSTGRES_HOST,
@@ -11,37 +12,25 @@ const pool = new Pool({
 	idleTimeoutMillis: 30000,
 });
 
-export const createUsersTable = () => {
-	const queryText = `CREATE TABLE IF NOT EXISTS
-	users(
-		id SERIAL PRIMARY KEY,
-		email VARCHAR(256) NOT NULL UNIQUE,
-		password TEXT NOT NULL,
-		first_name TEXT NOT NULL,
-		last_name TEXT NOT NULL,
-		profile_image TEXT,
-	)`;
-	pool.query(queryText).then((res) => {
-		console.log(res);
-	});
-};
+export const createUsersTable = `CREATE TABLE IF NOT EXISTS
+users(
+	id SERIAL PRIMARY KEY,
+	email VARCHAR(256) NOT NULL UNIQUE,
+	password TEXT NOT NULL,
+	first_name TEXT NOT NULL,
+	last_name TEXT NOT NULL,
+	profile_image TEXT,
+)`;
 
-export const createBalanceTable = () => {
-	const queryText = `CREATE TABLE IF NOT EXISTS
+export const createBalanceTable = `CREATE TABLE IF NOT EXISTS
 	balance(
 		id SERIAL PRIMARY KEY,
 		user_id INT NOT NULL,
 		balance INT NOT NULL,
 		FOREIGN KEY (user_id) REFERENCES users (id)
-
 	)`;
-	pool.query(queryText).then((res) => {
-		console.log(res);
-	});
-};
 
-export const createServicesTable = () => {
-	const queryText = `CREATE TABLE IF NOT EXISTS
+export const createServicesTable = `CREATE TABLE IF NOT EXISTS
 	services(
 		id SERIAL PRIMARY KEY,
 		service_code VARCHAR(20) NOT NULL UNIQUE,
@@ -49,12 +38,8 @@ export const createServicesTable = () => {
 		service_icon TEXT NOT NULL,
 		service_tariff INT NOT NULL
 	)`;
-	pool.query(queryText).then((res) => {
-		console.log(res);
-	});
-};
 
-export const createBannerTable = () => {
+export const createBannerTable = (res: Response) => {
 	const queryText = `CREATE TABLE IF NOT EXISTS
 	banners(
 		id SERIAL PRIMARY KEY,
@@ -62,13 +47,19 @@ export const createBannerTable = () => {
 		banner_image TEXT NOT NULL,
 		description TEXT NOT NULL,
 	)`;
-	pool.query(queryText).then((res) => {
-		console.log(res);
+	pool.query(queryText).then(() => {
+		res.send("created table banner");
 	});
+	const queryAddBanner = `INSERT INTO banners (banner_name, banner_image, description) values ($1, $2, $3)`;
+	for (let index = 0; index < 6; index++) {
+		const values = [`Banner ${index + 1}`, "https://nutech-integrasi.app/dummy.jpg", "Lerem Ipsum Dolor sit amet"];
+		pool.query(queryAddBanner, values).then(() => {
+			res.send(`inserted banner ${index + 1}`);
+		});
+	}
 };
 
-export const createTransactionTable = () => {
-	const queryText = `CREATE TABLE IF NOT EXISTS
+export const createTransactionTable = `CREATE TABLE IF NOT EXISTS
 	transaction(
 		id SERIAL PRIMARY KEY,
 		invoice_number VARCHAR(15) NOT NULL UNIQUE,
@@ -78,13 +69,8 @@ export const createTransactionTable = () => {
 		description TEXT NOT NULL,
 		created_on TIMESTAMP
 	)`;
-	pool.query(queryText).then((res) => {
-		console.log(res);
-	});
-};
 
-export const createUsersTransactionTable = () => {
-	const queryText = `CREATE TABLE IF NOT EXISTS
+export const createUsersTransactionTable = `CREATE TABLE IF NOT EXISTS
 	users_transaction(
 		user_id INT,
 		transaction_id INT,
@@ -92,9 +78,5 @@ export const createUsersTransactionTable = () => {
 		FOREIGN KEY (user_id) REFERENCES users (id),
 		FOREIGN KEY (transaction_id) REFERENCES transaction (id)
 	)`;
-	pool.query(queryText).then((res) => {
-		console.log(res);
-	});
-};
 
 export default pool;

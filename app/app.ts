@@ -22,6 +22,7 @@ class App {
 				res.send("connected to DB");
 			});
 		});
+
 		controller.forEach((c) => {
 			this.app.use("api/v1", c.router);
 		});
