@@ -24,13 +24,8 @@ class App {
 		// 		res.send("connected to DB");
 		// 	});
 		// });
-		this.app.use("/", (req: Request, res: Response) => {
-			pool.on("connect", () => {
-				res.send("connected to DB");
-			});
-		});
 
-		this.app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerDef));
+		this.app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerDef, { explorer: true }));
 
 		controller.forEach((c) => {
 			this.app.use("/api/v1", c.router);
@@ -39,6 +34,9 @@ class App {
 
 	listen() {
 		this.app.listen(env.PORT, () => {
+			pool.on("connect", () => {
+				console.log("connected to DB");
+			});
 			console.log(`App run on port ${env.PORT}`);
 		});
 	}

@@ -11,6 +11,7 @@ export class MembershipController extends Controller {
 		this.initRoute();
 	}
 	protected initRoute(): void {
+		this.router.use("/");
 		this.router.post(`${this.path}/registtration`, validationMiddleware(registerScheme), this.register);
 		this.router.post(`${this.path}/login`, validationMiddleware(loginScheme), this.login);
 		this.router.get(`${this.path}/profile`, this.isLoggedIn);
