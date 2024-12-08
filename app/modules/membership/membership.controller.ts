@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import jwt from "jsonwebtoken";
 import { Controller } from "../../interfaces/controller";
 import { MembershipService } from "./membership.service";
 import validationMiddleware from "../../middleware/validation";
@@ -49,7 +50,9 @@ export class MembershipController extends Controller {
 
 	private async update(req: Request, res: Response, next: NextFunction) {
 		try {
-			// const userData=await this.membershipService.
+			const token = req.headers["authorization"]?.split(" ")[1];
+			// const userid=jwt.decode(token)
+			// const userData=await this.membershipService.updateUserById(userid,req.body)
 		} catch (error) {
 			next(error);
 		}

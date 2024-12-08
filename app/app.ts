@@ -19,14 +19,11 @@ class App {
 	}
 
 	private initController(controller: Controller[]) {
-		// this.app.get("/", (req: Request, res: Response) => {
-		// 	pool.on("connect", () => {
-		// 		res.send("connected to DB");
-		// 	});
-		// });
-
-		this.app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerDef, { explorer: true }));
-
+		this.app.use("/", (req: Request, res: Response) => {
+			pool.on("connect", () => {
+				res.send("connected to DB");
+			});
+		});
 		controller.forEach((c) => {
 			this.app.use("/api/v1", c.router);
 		});
@@ -34,11 +31,9 @@ class App {
 
 	listen() {
 		this.app.listen(env.PORT, () => {
-			pool.on("connect", () => {
-				console.log("connected to DB");
-			});
-			console.log("jhknl");
-
+			// pool.on("connect", () => {
+			// 	console.log("connected to DB");
+			// });
 			console.log(`App run on port ${env.PORT}`);
 		});
 	}

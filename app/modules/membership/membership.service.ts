@@ -55,6 +55,21 @@ export class MembershipService {
 	}
 
 	/**
+	 * updateUser
+	 */
+	public async updateUserById(userid: number, data: RegisterPayload) {
+		if (!userid) {
+			throw new herror.Unauthorized();
+		}
+		const user = await this.memberRepo.findUserById(userid);
+		if (!user) {
+			throw new herror.Unauthorized("user not found");
+		}
+		const updatedUser = await this.memberRepo.updateUserById(user.id, data, user);
+		return this.userDataWithoutPwd(updatedUser);
+	}
+
+	/**
 	 * createToken
 	 */
 	public createToken(userId: number) {

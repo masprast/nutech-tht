@@ -34,4 +34,12 @@ export class MemberRepository {
 		const result = await pool.query<User>(statement.findUserById(id));
 		return result.rows[0];
 	}
+
+	/**
+	 * updateUserById
+	 */
+	public async updateUserById(id: number, data: RegisterPayload, user: User) {
+		const result = await pool.query<User>(statement.updateUserById(id, data, user));
+		return result.rows[0];
+	}
 }
