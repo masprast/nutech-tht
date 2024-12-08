@@ -37,6 +37,8 @@ class App {
 			pool.on("connect", () => {
 				console.log("connected to DB");
 			});
+			console.log("jhknl");
+
 			console.log(`App run on port ${env.PORT}`);
 		});
 	}
