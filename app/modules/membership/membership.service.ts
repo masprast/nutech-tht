@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import herror from "http-errors";
-import { createUser, findUserByEmail, findUserById, updateUserById } from "./member.repository";
+import { createUser, findUserByEmail, findUserById, updateUserById } from "./membership.repository";
 import { decrypt, encrypt } from "../../utils/pwdUtil";
 import { User } from "../../models/user.model";
 import { env } from "../../config/env";
@@ -69,5 +69,3 @@ function userDataWithoutPwd(user: User) {
 	const { password: _password, ...dataWithoutPwd } = user;
 	return dataWithoutPwd;
 }
-
-export default { findUser, registerUser, loginUser, isLoggedIn, updateUser, createToken };

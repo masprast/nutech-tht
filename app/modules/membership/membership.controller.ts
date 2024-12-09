@@ -50,6 +50,10 @@ async function isLogged(req: Request, res: Response, next: NextFunction) {
 
 async function update(req: Request, res: Response, next: NextFunction) {
 	try {
+		const error = validationResult(req);
+		if (error) {
+			res.status(400).json({ status: 102, message: "format email salah", data: null });
+		}
 		const token = req.headers["authorization"]?.split(" ")[1];
 		const userid = jwt.decode(token!);
 		const userData = await updateUser(Number(userid), req.body as RegisterPayload);

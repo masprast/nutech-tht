@@ -15,3 +15,5 @@ export const loginValidator = [
 	body("password", "password must not be empty").not().isEmpty(),
 	body("password", "minimum password length is 6 character").isLength({ min: 6 }),
 ];
+
+export const infoValidator = [body("name", "name must be a string").isString()];

@@ -1,6 +1,10 @@
 # NuTech Take Home Test REST API
 
-link ![railway.app](https://nutech-tht-production-dc2e.up.railway.app/)
+### skema database
+
+![skema database](public/db_scheme.drawio.png)
+
+link deployed: [railway.app](https://nutech-tht-production-dc2e.up.railway.app/)
 
 ### berfungsi
 
