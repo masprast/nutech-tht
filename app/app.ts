@@ -29,10 +29,10 @@ class App {
 		});
 	}
 
-	listen() {
+	listen(res: Response) {
 		this.app.listen(env.PORT, () => {
 			pool.on("connect", () => {
-				console.log("connected to DB");
+				res.send("connected to DB");
 			});
 			console.log(`App run on port ${env.PORT}`);
 		});
