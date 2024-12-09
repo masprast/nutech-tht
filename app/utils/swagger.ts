@@ -16,6 +16,6 @@ const doc = {
 	},
 };
 
-const swaggerDef = swaggerJSDoc({ swaggerDefinition: doc, apis: ["./app/routes/*.route.ts"] });
+const swaggerDef = swaggerJSDoc({ swaggerDefinition: doc, apis: ["app/routes/*.route.ts"] });
 
 export default swaggerDef;
