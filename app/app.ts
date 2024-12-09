@@ -19,11 +19,11 @@ class App {
 	}
 
 	private initController(controller: Controller[]) {
-		this.app.use("/", (req: Request, res: Response) => {
-			pool.on("connect", () => {
-				res.send("connected to DB");
-			});
-		});
+		// this.app.use("/", (req: Request, res: Response) => {
+		// 	pool.on("connect", () => {
+		// 		res.send("connected to DB");
+		// 	});
+		// });
 		controller.forEach((c) => {
 			this.app.use("/api/v1", c.router);
 		});
