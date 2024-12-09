@@ -23,9 +23,7 @@ class App {
 		controller.forEach((c) => {
 			r.push(c);
 		});
-		r.forEach((rr) => {
-			this.app.use("/", rr);
-		});
+		this.app.use("/", route.router);
 		this.app.get("/", (req: Request, res: Response) => {
 			res.send("server running");
 		});
