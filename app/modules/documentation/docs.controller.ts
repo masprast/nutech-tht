@@ -4,7 +4,7 @@ import swaggerDef from "../../utils/swagger";
 
 export class DocsController extends Controller {
 	constructor() {
-		super("/api-docs");
+		super("/docs");
 		this.initRoute();
 	}
 	protected initRoute(): void {
