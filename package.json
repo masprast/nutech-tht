@@ -5,8 +5,8 @@
 	"main": "server.ts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "npx ts-node app/server.ts",
-		"start": "npx ts-node app/server.ts"
+		"dev": "npx ts-node app/app.ts",
+		"start": "npx ts-node app/app.ts"
 	},
 	"keywords": [],
 	"author": "",

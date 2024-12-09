@@ -41,6 +41,14 @@ import express, { Request, Response } from "express";
 import helmet from "helmet";
 import route from "./routes/route";
 import { env } from "./config/env";
+import pool, {
+	createBalanceTable,
+	createBannerTable,
+	createServicesTable,
+	createTransactionTable,
+	createUsersTable,
+	createUsersTransactionTable,
+} from "./config/db";
 
 const app = express();
 
@@ -49,10 +57,41 @@ app.use(express.json());
 
 app.use("/", route);
 app.get("/", (req: Request, res: Response) => {
+	pool.on("connect", async () => {
+		await pool.query(createUsersTable);
+		await pool.query(createBalanceTable);
+		await pool.query(createServicesTable);
+		createBannerTable(res);
+		await pool.query(createTransactionTable);
+		await pool.query(createUsersTransactionTable);
+	});
 	res.send("server is runnung");
 });
 
 app.listen(env.PORT, () => {
 	console.log(`app is running on ${env.PORT}`);
 });
-export default app;
+
+// import bodyParser from "body-parser";
+// import express from "express";
+// import pg from "pg";
+
+// // Connect to the database using the DATABASE_URL environment
+// //   variable injected by Railway
+// const pool = new pg.Pool();
+
+// const app = express();
+// const port = process.env.PORT || 3333;
+
+// app.use(bodyParser.json());
+// app.use(bodyParser.raw({ type: "application/vnd.custom-type" }));
+// app.use(bodyParser.text({ type: "text/html" }));
+
+// app.get("/", async (req, res) => {
+//   const { rows } = await pool.query("SELECT NOW()");
+//   res.send(`Hello, World! The time from the DB is ${rows[0].now}`);
+// });
+
+// app.listen(port, () => {
+//   console.log(`Example app listening at http://localhost:${port}`);
+// });
