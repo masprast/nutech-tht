@@ -16,6 +16,6 @@ const doc = {
 	},
 };
 
-const swaggerDef = swaggerJSDoc({ swaggerDefinition: doc, apis: ["app/modules/**/*.controller.ts"] });
+const swaggerDef = swaggerJSDoc({ swaggerDefinition: doc, apis: ["./app/modules/**/*.controller.ts"] });
 
 export default swaggerDef;
