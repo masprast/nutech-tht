@@ -1,4 +1,4 @@
-import { NextFunction, Request, response, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { Controller } from "../../interfaces/controller";
 import { MembershipService } from "./membership.service";
@@ -12,7 +12,7 @@ export class MembershipController extends Controller {
 		this.initRoute();
 	}
 	protected initRoute(): void {
-		this.router.post(`${this.path}/registtration`, validationMiddleware(registerScheme), this.register);
+		this.router.post(`${this.path}/registration`, validationMiddleware(registerScheme), this.register);
 		this.router.post(`${this.path}/login`, validationMiddleware(loginScheme), this.login);
 		this.router.get(`${this.path}/profile`, this.isLoggedIn);
 		this.router.put(`${this.path}/profile/update`, this.update);

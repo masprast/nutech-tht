@@ -24,6 +24,9 @@ class App {
 		// 		res.send("connected to DB");
 		// 	});
 		// });
+		this.app.use("/", (req: Request, res: Response) => {
+			res.send("server running");
+		});
 		controller.forEach((c) => {
 			this.app.use("/api/v1", c.router);
 		});
