@@ -1,11 +1,16 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { createToken, loginUser, registerUser, updateUser, isLoggedIn } from "./membership.service";
+import { createToken, loginUser, registerUser, updateUser, isLoggedIn, findUser } from "./membership.service";
 import { RegisterPayload } from "./membership.validation";
 
 async function register(req: Request, res: Response, next: NextFunction) {
 	try {
-		const newUser = await registerUser(req.body);
+		const body = req.body as RegisterPayload;
+		const existedUser = await findUser(body.email);
+		if (existedUser) {
+			res.status(400).json({ status: 102, message: "email sudah terdaftar", data: null });
+		}
+		const newUser = await registerUser(body);
 		res.cookie("Authentication", createToken(newUser.id));
 		res.status(200).json({ status: 0, message: "registrasi berhasil silahkan login", data: null });
 	} catch (error) {

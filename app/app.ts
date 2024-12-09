@@ -2,6 +2,14 @@ import express, { Request, Response } from "express";
 import helmet from "helmet";
 import { env } from "./config/env";
 import router from "./routes/route";
+import pool, {
+	createUsersTable,
+	createBalanceTable,
+	createServicesTable,
+	createBannerTable,
+	createTransactionTable,
+	createUsersTransactionTable,
+} from "./config/db";
 
 const app = express();
 
@@ -14,6 +22,14 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.listen(env.PORT, () => {
+	pool.on("connect", async () => {
+		await pool.query(createUsersTable);
+		await pool.query(createBalanceTable);
+		await pool.query(createServicesTable);
+		await createBannerTable();
+		await pool.query(createTransactionTable);
+		await pool.query(createUsersTransactionTable);
+	});
 	console.log(`app is running on ${env.PORT}`);
 });
 

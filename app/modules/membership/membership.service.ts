@@ -6,6 +6,14 @@ import { User } from "../../models/user.model";
 import { env } from "../../config/env";
 import { RegisterPayload, LoginPayload } from "./membership.validation";
 
+export async function findUser(email: string) {
+	const existeduser = await findUserByEmail(email);
+	if (!existeduser) {
+		throw new herror.NotFound();
+	}
+	return userDataWithoutPwd(existeduser);
+}
+
 export async function registerUser(payload: RegisterPayload) {
 	const existedUser = await findUserByEmail(payload.email);
 	if (existedUser) {
@@ -62,4 +70,4 @@ function userDataWithoutPwd(user: User) {
 	return dataWithoutPwd;
 }
 
-export default { registerUser, loginUser, isLoggedIn, updateUser, createToken };
+export default { findUser, registerUser, loginUser, isLoggedIn, updateUser, createToken };

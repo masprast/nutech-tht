@@ -4,10 +4,6 @@ import statement from "./membership.statement";
 import { RegisterPayload } from "./membership.validation";
 
 export async function createUser(payload: RegisterPayload) {
-	// const text = "INSERT INTO users (email, password, first_name, last_name) VALUES ($1, $2, $3,$4) RETURNING *";
-	// const values = [payload.email, payload.password, payload.first_name, payload.last_name];
-	console.log(payload);
-
 	const result = await pool.query<User>(statement.createUser(payload));
 	return result.rows[0];
 }

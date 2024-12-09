@@ -2,11 +2,11 @@
 	"name": "nutech",
 	"version": "1.0.0",
 	"description": "",
-	"main": "server.ts",
+	"main": "app.ts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "npx ts-node app/server.ts",
-		"start": "npx ts-node app/server.ts"
+		"dev": "npx ts-node app/app.ts",
+		"start": "npx ts-node app/app.ts"
 	},
 	"keywords": [],
 	"author": "",
