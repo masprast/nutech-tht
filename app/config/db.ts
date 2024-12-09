@@ -39,7 +39,7 @@ export const createServicesTable = `CREATE TABLE IF NOT EXISTS
 		service_tariff INT NOT NULL
 	)`;
 
-export const createBannerTable = (res: Response) => {
+export const createBannerTable = async () => {
 	const queryText = `CREATE TABLE IF NOT EXISTS
 	banners(
 		id SERIAL PRIMARY KEY,
@@ -47,15 +47,11 @@ export const createBannerTable = (res: Response) => {
 		banner_image TEXT NOT NULL,
 		description TEXT NOT NULL,
 	)`;
-	pool.query(queryText).then(() => {
-		res.send("created table banner");
-	});
+	await pool.query(queryText);
 	const queryAddBanner = `INSERT INTO banners (banner_name, banner_image, description) values ($1, $2, $3)`;
 	for (let index = 0; index < 6; index++) {
 		const values = [`Banner ${index + 1}`, "https://nutech-integrasi.app/dummy.jpg", "Lerem Ipsum Dolor sit amet"];
-		pool.query(queryAddBanner, values).then(() => {
-			res.send(`inserted banner ${index + 1}`);
-		});
+		await pool.query(queryAddBanner, values);
 	}
 };
 
