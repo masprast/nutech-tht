@@ -39,7 +39,7 @@
 
 import express, { Request, Response } from "express";
 import helmet from "helmet";
-import route from "./routes/route";
+// import route from "./routes/route";
 import { env } from "./config/env";
 import pool, {
 	createBalanceTable,
