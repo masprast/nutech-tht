@@ -7,7 +7,7 @@ async function register(req: Request, res: Response, next: NextFunction) {
 	try {
 		const newUser = await registerUser(req.body);
 		res.cookie("Authentication", createToken(newUser.id));
-		res.status(201).json(newUser);
+		res.status(200).json({ status: 0, message: "registrasi berhasil silahkan login", data: null });
 	} catch (error) {
 		next(error);
 	}
