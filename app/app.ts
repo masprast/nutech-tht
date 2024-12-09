@@ -1,14 +1,13 @@
-import express, { Request, Response } from "express";
+import express, { Request, Response, Router } from "express";
 import swaggerUI from "swagger-ui-express";
 import helmet from "helmet";
-import { Controller } from "./interfaces/controller";
 import { env } from "./config/env";
 import pool from "./config/db";
 import swaggerDef from "./utils/swagger";
 
 class App {
 	private app: express.Application;
-	constructor(controller: Controller[]) {
+	constructor(controller: Router[]) {
 		this.app = express();
 		this.initMiddleware();
 		this.initController(controller);
@@ -18,9 +17,9 @@ class App {
 		this.app.use(helmet());
 	}
 
-	private initController(controller: Controller[]) {
+	private initController(controller: Router[]) {
 		controller.forEach((c) => {
-			this.app.use("/", c.router);
+			this.app.use("/", c);
 		});
 		this.app.get("/", (req: Request, res: Response) => {
 			res.send("server running");

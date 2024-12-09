@@ -107,4 +107,5 @@ async function update(req: Request, res: Response, next: NextFunction) {
 router.post("/registration", validationMiddleware(registerScheme), register);
 router.post("/login", validationMiddleware(loginScheme), login);
 router.get("/profile", authMiddleware, isLoggedIn);
+router.put("/profile/update", validationMiddleware(registerScheme), update);
 export default router;

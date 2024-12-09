@@ -1,6 +1,6 @@
 import App from "./app";
-import { DocsController } from "./modules/documentation/docs.controller";
-import { MembershipController } from "./modules/membership/membership.controller";
+import docs from "./modules/documentation/docs.controller";
+import membership from "./modules/membership/membership.controller";
 
-const app = new App([new DocsController(), new MembershipController()]);
+const app = new App([membership, docs]);
 app.listen();
