@@ -3,7 +3,7 @@
 ### skema database
 
 ![skema database](public/db_scheme.drawio.png)
-
+link project on [github.com](https://github.com/masprast/nutech-tht)
 link deployed: [railway.app](https://nutech-tht-production-dc2e.up.railway.app/)
 
 ![skema railway](public/skema.railway.png)
