@@ -2,13 +2,14 @@ import express, { Request, Response } from "express";
 import helmet from "helmet";
 import { env } from "./config/env";
 import router from "./routes/route";
-import pool from // createUsersTable,
+// import pool from
+// createUsersTable,
 // createBalanceTable,
 // createServicesTable,
 // createBannerTable,
 // createTransactionTable,
 // createUsersTransactionTable,
-"./config/db";
+// "./config/db";
 
 const app = express();
 
