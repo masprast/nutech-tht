@@ -10,7 +10,7 @@ import pool, {
 import app from "./app";
 import { env } from "./config/env";
 
-let server: Server;
+let server: Express.Application;
 
 pool.on("connect", async () => {
 	await pool.query(createUsersTable);
@@ -19,7 +19,5 @@ pool.on("connect", async () => {
 	await createBannerTable();
 	await pool.query(createTransactionTable);
 	await pool.query(createUsersTransactionTable);
-	server = app.listen(env.PORT, () => {
-		console.log(`app is running on ${env.PORT}`);
-	});
+	server = app;
 });
