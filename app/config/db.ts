@@ -1,6 +1,5 @@
 import { Pool } from "pg";
 import { env } from "./env";
-import { Response } from "express";
 
 const pool = new Pool({
 	// host: env.PGHOST,
