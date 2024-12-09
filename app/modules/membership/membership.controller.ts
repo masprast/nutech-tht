@@ -2,9 +2,14 @@ import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { createToken, loginUser, registerUser, updateUser, isLoggedIn, findUser } from "./membership.service";
 import { RegisterPayload } from "./membership.validation";
+import { validationResult } from "express-validator";
 
 async function register(req: Request, res: Response, next: NextFunction) {
 	try {
+		const error = validationResult(req);
+		if (error) {
+			res.status(400).json({ status: 102, message: "format email salah", data: null });
+		}
 		const body = req.body as RegisterPayload;
 		const existedUser = await findUser(body.email);
 		if (existedUser) {
@@ -20,6 +25,10 @@ async function register(req: Request, res: Response, next: NextFunction) {
 
 async function login(req: Request, res: Response, next: NextFunction) {
 	try {
+		const error = validationResult(req);
+		if (error) {
+			res.status(400).json({ status: 102, message: "format email salah", data: null });
+		}
 		const user = await loginUser(req.body);
 		res.cookie("Authentication", createToken(user.id));
 		res.json(user);
