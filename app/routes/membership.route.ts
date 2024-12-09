@@ -5,8 +5,8 @@ import { registerScheme, loginScheme } from "../modules/membership/membership.va
 import membership from "../modules/membership/membership.controller";
 
 const router = Router();
-router.post("/registration", validationMiddleware(registerScheme), membership.register);
-router.post("/login", validationMiddleware(loginScheme), membership.login);
+router.post("/registration", membership.register);
+router.post("/login", membership.login);
 router.get("/profile", authMiddleware, membership.isLogged);
-router.put("/profile/update", validationMiddleware(registerScheme), membership.update);
+router.put("/profile/update", membership.update);
 export default router;
