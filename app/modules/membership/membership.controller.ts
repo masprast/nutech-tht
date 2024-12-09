@@ -65,9 +65,9 @@ const membershipService = new MembershipService();
 
 async function register(req: Request, res: Response, next: NextFunction) {
 	try {
-		// const newUser = await membershipService.registerUser(req.body);
-		// res.cookie("Authentication", membershipService.createToken(newUser.id));
-		res.status(201).json(req.body);
+		const newUser = await membershipService.registerUser(req.body);
+		res.cookie("Authentication", membershipService.createToken(newUser.id));
+		res.status(201).json(newUser);
 	} catch (error) {
 		next(error);
 	}
