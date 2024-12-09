@@ -16,7 +16,7 @@ pool.on("connect", async () => {
 	await pool.query(createUsersTable);
 	await pool.query(createBalanceTable);
 	await pool.query(createServicesTable);
-	createBannerTable();
+	await createBannerTable();
 	await pool.query(createTransactionTable);
 	await pool.query(createUsersTransactionTable);
 	server = app.listen(env.PORT, () => {
