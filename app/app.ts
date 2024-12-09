@@ -18,10 +18,6 @@ app.use(express.json());
 
 app.use("/", router);
 app.get("/", (req: Request, res: Response) => {
-	res.send("server is runnung");
-});
-
-app.listen(env.PORT, () => {
 	pool.on("connect", async () => {
 		await pool.query(createUsersTable);
 		await pool.query(createBalanceTable);
@@ -29,7 +25,11 @@ app.listen(env.PORT, () => {
 		await createBannerTable();
 		await pool.query(createTransactionTable);
 		await pool.query(createUsersTransactionTable);
+		res.send("server is runnung");
 	});
+});
+
+app.listen(env.PORT, () => {
 	console.log(`app is running on ${env.PORT}`);
 });
 
