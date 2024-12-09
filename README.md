@@ -6,6 +6,8 @@
 
 link deployed: [railway.app](https://nutech-tht-production-dc2e.up.railway.app/)
 
+![skema railway](public/skema.railway.png)
+
 ### berfungsi
 
 1. deployed to railway.app

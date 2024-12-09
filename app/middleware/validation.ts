@@ -1,4 +1,4 @@
-import { body } from "express-validator";
+import { body, header } from "express-validator";
 
 export const registrasiValidator = [
 	body("email", "email must not be empty").not().isEmpty(),
@@ -17,3 +17,5 @@ export const loginValidator = [
 ];
 
 export const infoValidator = [body("name", "name must be a string").isString()];
+
+export const tokenValidator = [header("authentication", "invalid token").isJWT()];
