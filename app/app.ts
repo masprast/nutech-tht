@@ -32,7 +32,7 @@ class App {
 		});
 	}
 
-	listen(res: Response) {
+	listen() {
 		this.app.listen(env.PORT, () => {
 			pool.on("connect", () => {
 				console.log("connected to DB");
