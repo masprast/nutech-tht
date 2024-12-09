@@ -12,7 +12,7 @@ const doc = {
 		securitySchemes: {
 			bearerAuth: { type: "http", scheme: "bearer" },
 		},
-		schemas: {},
+		// schemas: {},
 	},
 };
 
