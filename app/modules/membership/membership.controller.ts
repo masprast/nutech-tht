@@ -9,13 +9,16 @@ export class MembershipController extends Controller {
 	private membershipService = new MembershipService();
 	constructor() {
 		super("/");
+		this.router.use("/", () => {
+			console.log("membership route");
+		});
 		this.initRoute();
 	}
 	protected initRoute(): void {
 		this.router.post(`${this.path}/registtration`, validationMiddleware(registerScheme), this.register);
 		this.router.post(`${this.path}/login`, validationMiddleware(loginScheme), this.login);
 		this.router.get(`${this.path}/profile`, this.isLoggedIn);
-		// this.router.put(`${this.path}/profile/update`);
+		this.router.put(`${this.path}/profile/update`, this.update);
 	}
 
 	private async register(req: Request, res: Response, next: NextFunction) {
@@ -50,6 +53,8 @@ export class MembershipController extends Controller {
 	private async update(req: Request, res: Response, next: NextFunction) {
 		try {
 			const token = req.headers["authorization"]?.split(" ")[1];
+			console.log(token);
+
 			// const userid=jwt.decode(token)
 			// const userData=await this.membershipService.updateUserById(userid,req.body)
 		} catch (error) {

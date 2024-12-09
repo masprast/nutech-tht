@@ -8,7 +8,7 @@ export class DocsController extends Controller {
 		this.initRoute();
 	}
 	protected initRoute(): void {
-		// this.router.use()
-		this.router.use(`${this.path}/docs`, swaggerUI.serve, swaggerUI.setup(swaggerDef, { explorer: true }));
+		this.router.use(`${this.path}/docs`, swaggerUI.serve);
+		this.router.get(`${this.path}`, swaggerUI.setup(swaggerDef, { explorer: true }));
 	}
 }
