@@ -18,15 +18,15 @@ app.use(express.json());
 
 app.use("/", router);
 app.get("/", (req: Request, res: Response) => {
-	pool.on("connect", async () => {
-		await pool.query(createUsersTable);
-		await pool.query(createBalanceTable);
-		await pool.query(createServicesTable);
-		await createBannerTable();
-		await pool.query(createTransactionTable);
-		await pool.query(createUsersTransactionTable);
-		res.send("server is runnung");
-	});
+	// pool.on("connect", async () => {
+	// 	await pool.query(createUsersTable);
+	// 	await pool.query(createBalanceTable);
+	// 	await pool.query(createServicesTable);
+	// 	await createBannerTable();
+	// 	await pool.query(createTransactionTable);
+	// 	await pool.query(createUsersTransactionTable);
+	// });
+	res.send("server is runnung");
 });
 
 app.listen(env.PORT, () => {
