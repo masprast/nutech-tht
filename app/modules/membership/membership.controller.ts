@@ -34,15 +34,15 @@ async function isLoggedIn(req: Request, res: Response, next: NextFunction) {
 	}
 }
 
-async function update(req: Request, res: Response, next: NextFunction) {
-	try {
-		const token = req.headers["authorization"]?.split(" ")[1];
-		const userid = jwt.decode(token!);
-		const userData = await this.updateUserById(userid, req.body as RegisterPayload);
-		res.json(userData);
-	} catch (error) {
-		next(error);
-	}
-}
+// async function update(req: Request, res: Response, next: NextFunction) {
+// 	try {
+// 		const token = req.headers["authorization"]?.split(" ")[1];
+// 		const userid = jwt.decode(token!);
+// 		const userData = await this.updateUserById(userid, req.body as RegisterPayload);
+// 		res.json(userData);
+// 	} catch (error) {
+// 		next(error);
+// 	}
+// }
 
-export default { register, login, isLoggedIn, update };
+export default { register, login, isLoggedIn };
