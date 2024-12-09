@@ -8,21 +8,17 @@ import route from "./routes/route";
 
 class App {
 	private app: express.Application;
-	constructor(controller: Router[]) {
+	constructor() {
 		this.app = express();
 		this.initMiddleware();
-		this.initController(controller);
+		this.initController();
 	}
 
 	private initMiddleware() {
 		this.app.use(helmet());
 	}
 
-	private initController(controller: Router[]) {
-		const r = route.route;
-		controller.forEach((c) => {
-			r.push(c);
-		});
+	private initController() {
 		this.app.use("/", route.router);
 		this.app.get("/", (req: Request, res: Response) => {
 			res.send("server running");
