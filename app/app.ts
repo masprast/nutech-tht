@@ -1,10 +1,8 @@
-import express, { Request, Response, Router } from "express";
-import swaggerUI from "swagger-ui-express";
+import express, { Request, Response } from "express";
 import helmet from "helmet";
 import { env } from "./config/env";
 import pool from "./config/db";
-import swaggerDef from "./utils/swagger";
-import route from "./routes/route";
+import router from "./routes/route";
 
 class App {
 	private app: express.Application;
@@ -19,7 +17,7 @@ class App {
 	}
 
 	private initController() {
-		this.app.use("/", route.router);
+		this.app.use("/", router);
 		this.app.get("/", (req: Request, res: Response) => {
 			res.send("server running");
 		});
@@ -27,6 +25,8 @@ class App {
 
 	listen() {
 		this.app.listen(env.PORT, () => {
+			console.log("=== LOG ===");
+
 			pool.on("connect", () => {
 				console.log("server running");
 			});

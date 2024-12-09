@@ -1,6 +1,6 @@
 import swaggerUI from "swagger-ui-express";
 // import { Controller } from "../../interfaces/controller";
-import swaggerDef from "../../utils/swagger";
+import swaggerDef from "../utils/swagger";
 import { Router } from "express";
 
 // export class DocsController extends Controller {

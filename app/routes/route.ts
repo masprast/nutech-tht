@@ -1,6 +1,6 @@
 import { Router } from "express";
-import docs from "../modules/documentation/docs.controller";
-import membership from "../modules/membership/membership.controller";
+import membership from "./membership.route";
+import docs from "./docs.route";
 
 const router = Router();
 const route = [membership, docs];
@@ -9,4 +9,4 @@ route.forEach((r) => {
 	router.use("/", r);
 });
 
-export default { router, route };
+export default router;
