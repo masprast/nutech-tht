@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { createToken, loginUser, registerUser } from "./membership.service";
+import { createToken, loginUser, registerUser, updateUser, isLoggedIn } from "./membership.service";
 import { RegisterPayload } from "./membership.validation";
 
 async function register(req: Request, res: Response, next: NextFunction) {
@@ -23,26 +23,26 @@ async function login(req: Request, res: Response, next: NextFunction) {
 	}
 }
 
-async function isLoggedIn(req: Request, res: Response, next: NextFunction) {
+async function isLogged(req: Request, res: Response, next: NextFunction) {
 	try {
 		const token = req.headers["authorization"]?.split(" ")[1];
 		const userid = jwt.decode(token!);
-		// const loggedUser = await isLoggedIn(userid);
-		res.json(userid);
+		const loggedUser = await isLoggedIn(Number(userid));
+		res.json(loggedUser);
 	} catch (error) {
 		next(error);
 	}
 }
 
-// async function update(req: Request, res: Response, next: NextFunction) {
-// 	try {
-// 		const token = req.headers["authorization"]?.split(" ")[1];
-// 		const userid = jwt.decode(token!);
-// 		const userData = await this.updateUserById(userid, req.body as RegisterPayload);
-// 		res.json(userData);
-// 	} catch (error) {
-// 		next(error);
-// 	}
-// }
+async function update(req: Request, res: Response, next: NextFunction) {
+	try {
+		const token = req.headers["authorization"]?.split(" ")[1];
+		const userid = jwt.decode(token!);
+		const userData = await updateUser(Number(userid), req.body as RegisterPayload);
+		res.json(userData);
+	} catch (error) {
+		next(error);
+	}
+}
 
-export default { register, login, isLoggedIn };
+export default { register, login, isLogged, update };
