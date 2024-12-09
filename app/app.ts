@@ -19,23 +19,19 @@ class App {
 	}
 
 	private initController(controller: Controller[]) {
-		// this.app.use("/", (req: Request, res: Response) => {
-		// 	pool.on("connect", () => {
-		// 		res.send("connected to DB");
-		// 	});
-		// });
 		controller.forEach((c) => {
-			this.app.use("/api/v1", c.router);
+			this.app.use("/", c.router);
 		});
 		this.app.get("/", (req: Request, res: Response) => {
-			pool.on("connect", () => {
-				res.send("server running");
-			});
+			res.send("server running");
 		});
 	}
 
 	listen() {
 		this.app.listen(env.PORT, () => {
+			pool.on("connect", () => {
+				console.log("server running");
+			});
 			console.log(`App run on port ${env.PORT}`);
 		});
 	}
