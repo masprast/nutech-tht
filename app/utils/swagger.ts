@@ -1,6 +1,7 @@
 import swaggerJSDoc from "swagger-jsdoc";
 
 const doc = {
+	openapi: "3.0.0",
 	info: {
 		version: "v1.0.0",
 		title: "Swagger Take Home Test",
@@ -15,6 +16,6 @@ const doc = {
 	},
 };
 
-const swaggerDef = swaggerJSDoc({ swaggerDefinition: doc, apis: ["app/interfaces/controller.ts"] });
+const swaggerDef = swaggerJSDoc({ swaggerDefinition: doc, apis: ["app/modules/**/*.controller.ts"] });
 
 export default swaggerDef;
