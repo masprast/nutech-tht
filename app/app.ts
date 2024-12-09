@@ -28,9 +28,8 @@ class App {
 			this.app.use("/api/v1", c.router);
 		});
 		this.app.get("/", (req: Request, res: Response) => {
-			res.send("server running");
 			pool.on("connect", () => {
-				res.send("connected to DB");
+				res.send("server running");
 			});
 		});
 	}
