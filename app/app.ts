@@ -4,6 +4,7 @@ import helmet from "helmet";
 import { env } from "./config/env";
 import pool from "./config/db";
 import swaggerDef from "./utils/swagger";
+import route from "./routes/route";
 
 class App {
 	private app: express.Application;
@@ -18,8 +19,12 @@ class App {
 	}
 
 	private initController(controller: Router[]) {
+		const r = route.route;
 		controller.forEach((c) => {
-			this.app.use("/", c);
+			r.push(c);
+		});
+		r.forEach((rr) => {
+			this.app.use("/", rr);
 		});
 		this.app.get("/", (req: Request, res: Response) => {
 			res.send("server running");
