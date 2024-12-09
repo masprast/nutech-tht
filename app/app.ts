@@ -55,7 +55,7 @@ const app = express();
 app.use(helmet());
 app.use(express.json());
 
-app.use("/", route);
+// app.use("/", route);
 app.get("/", (req: Request, res: Response) => {
 	pool.on("connect", async () => {
 		await pool.query(createUsersTable);
