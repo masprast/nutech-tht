@@ -29,14 +29,14 @@ class App {
 		});
 		this.app.get("/", (req: Request, res: Response) => {
 			res.send("server running");
+			pool.on("connect", () => {
+				console.log("connected to DB");
+			});
 		});
 	}
 
 	listen() {
 		this.app.listen(env.PORT, () => {
-			pool.on("connect", () => {
-				console.log("connected to DB");
-			});
 			console.log(`App run on port ${env.PORT}`);
 		});
 	}
