@@ -8,7 +8,6 @@ import { RegisterPayload, LoginPayload } from "./membership.validation";
 
 export class MembershipService {
 	private memberRepo = new MemberRepository();
-	constructor() {}
 
 	/**
 	 * registerUser
