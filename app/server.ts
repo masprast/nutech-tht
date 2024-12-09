@@ -1,4 +1,3 @@
-import { Server } from "http";
 import pool, {
 	createBalanceTable,
 	createBannerTable,
@@ -8,7 +7,6 @@ import pool, {
 	createUsersTransactionTable,
 } from "./config/db";
 import app from "./app";
-import { env } from "./config/env";
 
 let server: Express.Application;
 
