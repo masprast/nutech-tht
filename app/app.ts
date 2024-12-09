@@ -30,7 +30,7 @@ class App {
 		this.app.get("/", (req: Request, res: Response) => {
 			res.send("server running");
 			pool.on("connect", () => {
-				console.log("connected to DB");
+				res.send("connected to DB");
 			});
 		});
 	}
