@@ -24,10 +24,12 @@ async function login(req: Request, res: Response, next: NextFunction) {
 	}
 }
 
-async function isLoggedIn(req: any, res: Response, next: NextFunction) {
+async function isLoggedIn(req: Request, res: Response, next: NextFunction) {
 	try {
-		const loggedUser = await membershipService.isLoggedIn(req.userId);
-		res.json(loggedUser);
+		const token = req.headers["authorization"]?.split(" ")[1];
+		const userid = jwt.decode(token!);
+		// const loggedUser = await membershipService.isLoggedIn(userid);
+		res.json(userid);
 	} catch (error) {
 		next(error);
 	}
