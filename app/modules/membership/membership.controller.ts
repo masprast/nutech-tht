@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
 import { MembershipService } from "./membership.service";
+import { RegisterPayload } from "./membership.validation";
 
 const membershipService = new MembershipService();
 
@@ -38,10 +39,8 @@ async function isLoggedIn(req: Request, res: Response, next: NextFunction) {
 async function update(req: Request, res: Response, next: NextFunction) {
 	try {
 		const token = req.headers["authorization"]?.split(" ")[1];
-		console.log(token);
-
 		const userid = jwt.decode(token!);
-		const userData = await this.membershipService.updateUserById(userid, req.body);
+		const userData = await this.membershipService.updateUserById(userid, req.body as RegisterPayload);
 		res.json(userData);
 	} catch (error) {
 		next(error);
