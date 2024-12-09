@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, response, Response } from "express";
 import jwt from "jsonwebtoken";
 import { Controller } from "../../interfaces/controller";
 import { MembershipService } from "./membership.service";
@@ -9,9 +9,6 @@ export class MembershipController extends Controller {
 	private membershipService = new MembershipService();
 	constructor() {
 		super("/");
-		this.router.use("/", () => {
-			console.log("membership route");
-		});
 		this.initRoute();
 	}
 	protected initRoute(): void {
