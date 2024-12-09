@@ -9,6 +9,6 @@ export class DocsController extends Controller {
 	}
 	protected initRoute(): void {
 		// this.router.use()
-		this.router.get(`${this.path}/api-docs`, swaggerUI.serve, swaggerUI.setup(swaggerDef, { explorer: true }));
+		this.router.use(`${this.path}/docs`, swaggerUI.serve, swaggerUI.setup(swaggerDef, { explorer: true }));
 	}
 }
