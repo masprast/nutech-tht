@@ -6,7 +6,7 @@ import doc from "../utils/swagger";
 const swaggerDef = swaggerJSDoc({ swaggerDefinition: doc, apis: ["app/routes/*.route.ts"] });
 
 const router = Router();
-router.use("/", swaggerUI.serve);
+router.use("/docs", swaggerUI.serve);
 router.get("/docs", swaggerUI.setup(swaggerDef, { explorer: true }));
 
 export default router;
